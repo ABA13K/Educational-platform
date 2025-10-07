@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كود شيلد - منصة تعلم البرمجة الآمنة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6A1B9A;
+            --primary-dark: #4A148C;
+            --primary-light: #9C27B0;
+            --secondary: #FFFFFF;
+            --accent: #E91E63;
+            --light: #F7F9FC;
+            --dark: #2B2D42;
+            --text: #333333;
+            --text-light: #666666;
+            --border: #E0E0E0;
+            --success: #4CAF50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'El Messiri', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        /* الترويسة المعدلة */
+        header {
+            background-color: var(--secondary);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            font-family: 'El Messiri', sans-serif;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo h1 {
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin: 0;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-tagline {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 2px;
+            font-weight: 300;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+            font-size: 1rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.8rem;
+            border-radius: 30px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(106, 27, 154, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-outline:hover {
+            background: rgba(106, 27, 154, 0.05);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 6px 15px rgba(106, 27, 154, 0.4);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        /* قسم البطل */
+        .hero {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            margin-top: 1rem;
+            font-weight: 400;
+        }
+
+        /* قسم الميزات */
+        .features {
+            padding: 5rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+            border-top: 4px solid var(--primary);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-size: 1.4rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* لغات البرمجة */
+        .languages {
+            padding: 4rem 5%;
+            background: var(--light);
+        }
+
+        .languages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .language-item {
+            background: white;
+            padding: 2rem 1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .language-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .language-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .language-item h4 {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        /* قسم الدورات */
+        .courses {
+            padding: 5rem 5%;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-image {
+            height: 180px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .course-category {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .course-content h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .course-content p {
+            color: var(--text-light);
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        /* قسم الإحصائيات */
+        .stats {
+            padding: 4rem 5%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-item h3 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            font-family: 'El Messiri', sans-serif;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* التذييل */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 300;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-right: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        /* التجاوب */
+        @media (max-width: 992px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .hero h2 {
+                font-size: 2.4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+                margin-top: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 1rem;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .auth-buttons {
+                margin-right: auto;
+                margin-left: 1rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.9rem;
+            }
+
+            .languages-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .auth-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+                margin-top: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .feature-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- الترويسة المعدلة -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <div class="logo-icon">CS</div>
+                <div class="logo-text">
+                    <h1>كود شيلد</h1>
+                    <span class="logo-tagline">برمجة آمنة</span>
+                </div>
+            </div>
+
+            <button class="mobile-menu-btn">☰</button>
+
+            <ul class="nav-links">
+                <li><a href="#" class="active">الرئيسية</a></li>
+                <li><a href="#">مسارات التعلم</a></li>
+                <li><a href="#">المشاريع</a></li>
+                <li><a href="#">المدربون</a></li>
+                <li><a href="#">المدونة</a></li>
+            </ul>
+
+            <div class="auth-buttons">
+                <button class="btn btn-outline">تسجيل الدخول</button>
+                <button class="btn btn-primary">ابدأ التعلم</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- قسم البطل -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>اكتشف عالم البرمجة بثقة وأمان</h2>
+            <p>منصة تعليم البرمجة الأولى التي تحمي محتواك التعليمي من السرقة. تعلم أحدث تقنيات البرمجة مع ضمان أقصى
+                درجات الحماية لدروسك.</p>
+            <button class="btn btn-primary"
+                style="padding: 0.8rem 2.5rem; font-size: 1.1rem; background: white; color: var(--primary);">ابدأ رحلتك
+                البرمجية</button>
+            <div class="security-badge">
+                <span>🔒</span>
+                <span>محمي بتقنيات متقدمة لمنع تسجيل الشاشة</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الميزات -->
+    <section class="features">
+        <div class="section-title">
+            <h2>لماذا تتعلم البرمجة مع كود شيلد؟</h2>
+            <p>نقدم تجربة تعلم فريدة تجمع بين المحتوى المتميز والحماية المتقدمة</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💻</div>
+                <h3>مسارات تعلم شاملة</h3>
+                <p>ابدأ من الصفر حتى الاحتراف مع مسارات تعلم منهجية تغطي جميع مجالات البرمجة.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>حماية محتوى متميزة</h3>
+                <p>نحمي دروسك من التسجيل والنسخ غير المصرح به بتقنيات تشفير متطورة.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>مشاريع عملية حقيقية</h3>
+                <p>طبق ما تتعلمه على مشاريع واقعية تبني portfolio قوي لسيرتك الذاتية.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👨‍💻</div>
+                <h3>مجتمع برمجي نشط</h3>
+                <p>انضم إلى آلاف المبرمجين وتواصل مع الخبراء واطلب المساعدة عندما تحتاج.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم لغات البرمجة -->
+    <section class="languages">
+        <div class="section-title">
+            <h2>تعلم أهم لغات البرمجة</h2>
+            <p>اختر من بين مجموعة واسعة من لغات البرمجة والتقنيات الحديثة</p>
+        </div>
+        <div class="languages-grid">
+            <div class="language-item">
+                <div class="language-icon">🐍</div>
+                <h4>Python</h4>
+            </div>
+            <div class="language-item">
+                <div class="language-icon">☕</div>
+                <h4>Java</h4>
+            </div>
+            <div class="language-item">
+                <div class="language-icon">⚡</div>
+                <h4>JavaScript</h4>
+            </div>
+            <div class="language-item">
+                <div class="language-icon">🔷</div>
+                <h4>TypeScript</h4>
+            </div>
+            <div class="language-item">
+                <div class="language-icon">🧮</div>
+                <h4>C++</h4>
+            </div>
+            <div class="language-item">
+                <div class="language-icon">📱</div>
+                <h4>Kotlin</h4>
+            </div>
+            <div class="language-item">
+                <div class="language-icon">📲</div>
+                <h4>Swift</h4>
+            </div>
+            <div class="language-item">
+                <div class="language-icon">🐘</div>
+                <h4>PHP</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الدورات -->
+    <section class="courses">
+        <div class="section-title">
+            <h2>أشهر مساراتنا التعليمية</h2>
+            <p>اختر المسار الذي يناسب أهدافك البرمجية</p>
+        </div>
+        <div class="courses-grid">
+            <div class="course-card">
+                <div class="course-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                </div>
+                <div class="course-content">
+                    <span class="course-category">تطوير الويب</span>
+                    <h3>مطور ويب كامل</h3>
+                    <p>تعلم HTML, CSS, JavaScript وتقنيات الويب الحديثة لتصبح مطور ويب محترف.</p>
+                    <div class="course-meta">
+                        <span>🕒 6 شهور</span>
+                        <span>👤 12,500+ طالب</span>
+                    </div>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                </div>
+                <div class="course-content">
+                    <span class="course-category">علم البيانات</span>
+                    <h3>علم البيانات مع Python</h3>
+                    <p>إتقان تحليل البيانات، التعلم الآلي، والتصور البياني باستخدام Python.</p>
+                    <div class="course-meta">
+                        <span>🕒 4 شهور</span>
+                        <span>👤 8,200+ طالب</span>
+                    </div>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                </div>
+                <div class="course-content">
+                    <span class="course-category">تطبيقات الجوال</span>
+                    <h3>تطوير تطبيقات Android</h3>
+                    <p>أنشئ تطبيقات Android متقدمة باستخدام Kotlin و Android Studio.</p>
+                    <div class="course-meta">
+                        <span>🕒 5 شهور</span>
+                        <span>👤 6,800+ طالب</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الإحصائيات -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>75,000+</h3>
+                <p>مبرمج نشط</p>
+            </div>
+            <div class="stat-item">
+                <h3>1,500+</h3>
+                <p>درس برمجي</p>
+            </div>
+            <div class="stat-item">
+                <h3>200+</h3>
+                <p>مشروع عملي</p>
+            </div>
+            <div class="stat-item">
+                <h3>98%</h3>
+                <p>معدل نجاح الخريجين</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>كود شيلد</h3>
+                <p>منصة تعليم البرمجة الآمنة التي تمكنك من تعلم البرمجة مع ضمان حماية محتواك التعليمي.</p>
+            </div>
+            <div class="footer-column">
+                <h3>مسارات التعلم</h3>
+                <ul class="footer-links">
+                    <li><a href="#">تطوير الويب</a></li>
+                    <li><a href="#">تطبيقات الجوال</a></li>
+                    <li><a href="#">علم البيانات</a></li>
+                    <li><a href="#">الأمن السيبراني</a></li>
+                    <li><a href="#">برمجة الألعاب</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>الدعم</h3>
+                <ul class="footer-links">
+                    <li><a href="#">الأسئلة الشائعة</a></li>
+                    <li><a href="#">سياسة الخصوصية</a></li>
+                    <li><a href="#">شروط الاستخدام</a></li>
+                    <li><a href="#">مركز المساعدة</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>اتصل بنا</h3>
+                <ul class="footer-links">
+                    <li>📧 hello@codeshield.com</li>
+                    <li>📞 +966 123 456 789</li>
+                    <li>📍 الرياض، المملكة العربية السعودية</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2023 كود شيلد. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script>
+        // تفعيل القائمة المتنقلة
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function () {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // إغلاق القائمة عند النقر على رابط
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // كشف فتح أدوات المطور (طبقة حماية أساسية)
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'u')) {
+                e.preventDefault();
+                alert('هذا الإجراء غير مسموح به للحفاظ على أمان المحتوى التعليمي.');
+            }
+        });
+
+        // منع النقر الأيمن
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+    </script>
+</body>
+
+</html>
