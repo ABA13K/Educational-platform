@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل طالب جديد - كود شيلد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6A1B9A;
+            --primary-dark: #4A148C;
+            --primary-light: #9C27B0;
+            --secondary: #FFFFFF;
+            --accent: #E91E63;
+            --light: #F7F9FC;
+            --dark: #2B2D42;
+            --text: #333333;
+            --text-light: #666666;
+            --border: #E0E0E0;
+            --success: #4CAF50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            font-family: 'Tajawal', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'El Messiri', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        /* الترويسة المعدلة */
+        header {
+            background-color: var(--secondary);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            font-family: 'El Messiri', sans-serif;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo h1 {
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin: 0;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-tagline {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 2px;
+            font-weight: 300;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+            font-size: 1rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.8rem;
+            border-radius: 30px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(106, 27, 154, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-outline:hover {
+            background: rgba(106, 27, 154, 0.05);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 6px 15px rgba(106, 27, 154, 0.4);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        /* قسم تسجيل الطالب */
+        .register-section {
+            flex: 1;
+            padding: 3rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(106, 27, 154, 0.05) 0%, rgba(156, 39, 176, 0.05) 100%);
+        }
+
+        .register-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 550px;
+            margin: 2rem auto;
+        }
+
+        .register-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .register-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .register-header p {
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .register-form {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Tajawal', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.1);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .form-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-check input {
+            margin-top: 0.2rem;
+        }
+
+        .form-check label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        .form-check a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .form-check a:hover {
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.9rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .login-link {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .login-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .divider span {
+            padding: 0 1rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 0.7rem;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 500;
+        }
+
+        .social-btn:hover {
+            background: var(--light);
+            transform: translateY(-2px);
+        }
+
+        /* قسم الاهتمامات */
+        .interests-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .interests-title {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .interest-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interest-item:hover {
+            border-color: var(--primary);
+            background: rgba(106, 27, 154, 0.03);
+        }
+
+        .interest-item.selected {
+            border-color: var(--primary);
+            background: rgba(106, 27, 154, 0.08);
+        }
+
+        .interest-checkbox {
+            display: none;
+        }
+
+        .interest-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .interest-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* التذييل */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 300;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-right: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        /* التجاوب */
+        @media (max-width: 992px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+                margin-top: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 1rem;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .auth-buttons {
+                margin-right: auto;
+                margin-left: 1rem;
+            }
+
+            .register-container {
+                margin: 1rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .social-login {
+                flex-direction: column;
+            }
+
+            .interests-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .auth-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+                margin-top: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .register-header {
+                padding: 1.5rem;
+            }
+
+            .register-form {
+                padding: 1.5rem;
+            }
+
+            .interests-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- الترويسة -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <div class="logo-icon">CS</div>
+                <div class="logo-text">
+                    <h1>كود شيلد</h1>
+                    <span class="logo-tagline">برمجة آمنة</span>
+                </div>
+            </div>
+
+            <button class="mobile-menu-btn">☰</button>
+
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="#">مسارات التعلم</a></li>
+                <li><a href="#">المشاريع</a></li>
+                <li><a href="#">المدربون</a></li>
+                <li><a href="#">المدونة</a></li>
+            </ul>
+
+            <div class="auth-buttons">
+                <button class="btn btn-outline" onclick="window.location.href='login.html'">تسجيل الدخول</button>
+                <button class="btn btn-primary" onclick="window.location.href='register.html'">انضم إلينا</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- قسم تسجيل الطالب -->
+    <section class="register-section">
+        <div class="register-container">
+            <div class="register-header">
+                <h2>انضم إلى مجتمع كود شيلد</h2>
+                <p>ابدأ رحلتك البرمجية الآمنة اليوم</p>
+            </div>
+            <form class="register-form" id="registerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">الاسم الأول</label>
+                        <input type="text" id="firstName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">اسم العائلة</label>
+                        <input type="text" id="lastName" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف</label>
+                    <input type="tel" id="phone" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">تأكيد كلمة المرور</label>
+                    <input type="password" id="confirmPassword" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="level">مستواك في البرمجة</label>
+                    <select id="level" class="form-control" required>
+                        <option value="" selected disabled>اختر مستواك</option>
+                        <option value="beginner">مبتدئ - أول مرة أتعلم البرمجة</option>
+                        <option value="intermediate">متوسط - لدي معرفة أساسية</option>
+                        <option value="advanced">متقدم - أريد تعميق معرفتي</option>
+                    </select>
+                </div>
+
+                <!-- قسم الاهتمامات -->
+                <div class="interests-section">
+                    <h3 class="interests-title">مجالات اهتمامك</h3>
+                    <div class="interests-grid">
+                        <label class="interest-item" for="web">
+                            <input type="checkbox" id="web" class="interest-checkbox" name="interests" value="web">
+                            <div class="interest-icon">🌐</div>
+                            <span class="interest-label">تطوير الويب</span>
+                        </label>
+
+                        <label class="interest-item" for="mobile">
+                            <input type="checkbox" id="mobile" class="interest-checkbox" name="interests"
+                                value="mobile">
+                            <div class="interest-icon">📱</div>
+                            <span class="interest-label">تطبيقات الجوال</span>
+                        </label>
+
+                        <label class="interest-item" for="data">
+                            <input type="checkbox" id="data" class="interest-checkbox" name="interests" value="data">
+                            <div class="interest-icon">📊</div>
+                            <span class="interest-label">علم البيانات</span>
+                        </label>
+
+                        <label class="interest-item" for="ai">
+                            <input type="checkbox" id="ai" class="interest-checkbox" name="interests" value="ai">
+                            <div class="interest-icon">🤖</div>
+                            <span class="interest-label">الذكاء الاصطناعي</span>
+                        </label>
+
+                        <label class="interest-item" for="cyber">
+                            <input type="checkbox" id="cyber" class="interest-checkbox" name="interests" value="cyber">
+                            <div class="interest-icon">🔒</div>
+                            <span class="interest-label">الأمن السيبراني</span>
+                        </label>
+
+                        <label class="interest-item" for="games">
+                            <input type="checkbox" id="games" class="interest-checkbox" name="interests" value="games">
+                            <div class="interest-icon">🎮</div>
+                            <span class="interest-label">برمجة الألعاب</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-check">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">أوافق على <a href="#">شروط الاستخدام</a> و <a href="#">سياسة الخصوصية</a></label>
+                </div>
+
+                <div class="form-check">
+                    <input type="checkbox" id="newsletter">
+                    <label for="newsletter">أرغب في تلقي النشرة الإخبارية والعروض الخاصة</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary submit-btn">إنشاء حساب</button>
+
+                <div class="login-link">
+                    لديك حساب بالفعل؟ <a href="login.html">سجل الدخول هنا</a>
+                </div>
+
+                <div class="divider">
+                    <span>أو</span>
+                </div>
+
+                <div class="social-login">
+                    <button type="button" class="social-btn">
+                        <span>G</span>
+                        التسجيل بحساب Google
+                    </button>
+                    <button type="button" class="social-btn">
+                        <span>f</span>
+                        التسجيل بحساب Facebook
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>كود شيلد</h3>
+                <p>منصة تعليم البرمجة الآمنة التي تمكنك من تعلم البرمجة مع ضمان حماية محتواك التعليمي.</p>
+            </div>
+            <div class="footer-column">
+                <h3>مسارات التعلم</h3>
+                <ul class="footer-links">
+                    <li><a href="#">تطوير الويب</a></li>
+                    <li><a href="#">تطبيقات الجوال</a></li>
+                    <li><a href="#">علم البيانات</a></li>
+                    <li><a href="#">الأمن السيبراني</a></li>
+                    <li><a href="#">برمجة الألعاب</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>الدعم</h3>
+                <ul class="footer-links">
+                    <li><a href="#">الأسئلة الشائعة</a></li>
+                    <li><a href="#">سياسة الخصوصية</a></li>
+                    <li><a href="#">شروط الاستخدام</a></li>
+                    <li><a href="#">مركز المساعدة</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>اتصل بنا</h3>
+                <ul class="footer-links">
+                    <li>📧 hello@codeshield.com</li>
+                    <li>📞 +966 123 456 789</li>
+                    <li>📍 الرياض، المملكة العربية السعودية</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2023 كود شيلد. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script>
+        // تفعيل القائمة المتنقلة
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function () {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // إغلاق القائمة عند النقر على رابط
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // تفعيل مربعات اختيار الاهتمامات
+        document.querySelectorAll('.interest-item').forEach(item => {
+            item.addEventListener('click', function () {
+                this.classList.toggle('selected');
+            });
+        });
+
+        // التحقق من صحة نموذج التسجيل
+        document.getElementById('registerForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const terms = document.getElementById('terms').checked;
+
+            // التحقق من تطابق كلمات المرور
+            if (password !== confirmPassword) {
+                alert('كلمات المرور غير متطابقة. يرجى المحاولة مرة أخرى.');
+                return;
+            }
+
+            // التحقق من قبول الشروط
+            if (!terms) {
+                alert('يجب الموافقة على شروط الاستخدام وسياسة الخصوصية.');
+                return;
+            }
+
+            // جمع الاهتمامات المختارة
+            const selectedInterests = [];
+            document.querySelectorAll('input[name="interests"]:checked').forEach(checkbox => {
+                selectedInterests.push(checkbox.value);
+            });
+
+            // التحقق من اختيار اهتمام واحد على الأقل
+            if (selectedInterests.length === 0) {
+                alert('يرجى اختيار مجال اهتمام واحد على الأقل.');
+                return;
+            }
+
+            // في حالة نجاح التحقق (في تطبيق حقيقي، سيتم إرسال البيانات إلى الخادم)
+            alert('تم إنشاء حسابك بنجاح! سيتم توجيهك إلى صفحة تسجيل الدخول.');
+            window.location.href = 'login.html';
+        });
+
+        // كشف فتح أدوات المطور (طبقة حماية أساسية)
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'u')) {
+                e.preventDefault();
+                alert('هذا الإجراء غير مسموح به للحفاظ على أمان المحتوى التعليمي.');
+            }
+        });
+
+        // منع النقر الأيمن
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+    </script>
+</body>
+
+</html>

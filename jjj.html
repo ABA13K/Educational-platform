@@ -430,6 +430,157 @@
             font-weight: 300;
         }
 
+        /* صفحة عرض الفيديوهات */
+        .video-player-page {
+            padding: 2rem 5%;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .video-container {
+            flex: 3;
+        }
+
+        .video-player {
+            width: 100%;
+            background-color: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .video-player video {
+            width: 100%;
+            display: block;
+        }
+
+        .video-controls {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .video-controls button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress {
+            position: absolute;
+            height: 100%;
+            background: var(--accent);
+            width: 30%;
+        }
+
+        .video-info {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .video-info h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .video-description {
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .playlist-container {
+            flex: 1;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            max-height: 800px;
+            position: sticky;
+            top: 100px;
+        }
+
+        .playlist-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.2rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .playlist-items {
+            max-height: 700px;
+            overflow-y: auto;
+        }
+
+        .playlist-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .playlist-item:hover {
+            background: rgba(106, 27, 154, 0.05);
+        }
+
+        .playlist-item.active {
+            background: rgba(106, 27, 154, 0.1);
+            border-right: 3px solid var(--primary);
+        }
+
+        .playlist-thumbnail {
+            width: 120px;
+            height: 70px;
+            background-color: #ddd;
+            border-radius: 6px;
+            flex-shrink: 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .playlist-item-info {
+            flex: 1;
+        }
+
+        .playlist-item-title {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        .playlist-item-duration {
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+
         /* التذييل */
         footer {
             background: var(--dark);
@@ -553,6 +704,15 @@
             .languages-grid {
                 grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             }
+
+            .video-player-page {
+                flex-direction: column;
+            }
+
+            .playlist-container {
+                position: static;
+                max-height: none;
+            }
         }
 
         @media (max-width: 576px) {
@@ -574,6 +734,25 @@
 
             .feature-card {
                 padding: 2rem 1.5rem;
+            }
+
+            .video-info {
+                padding: 1rem;
+            }
+
+            .video-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .playlist-item {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .playlist-thumbnail {
+                width: 100%;
+                height: 150px;
             }
         }
     </style>
@@ -602,170 +781,123 @@
             </ul>
 
             <div class="auth-buttons">
-                <a href="./signup.html"><button class="btn btn-outline">تسجيل الدخول</button></a>
+                <button class="btn btn-outline">تسجيل الدخول</button>
                 <button class="btn btn-primary">ابدأ التعلم</button>
             </div>
         </nav>
     </header>
 
-    <!-- قسم البطل -->
-    <section class="hero">
-        <div class="hero-content">
-            <h2>اكتشف عالم البرمجة بثقة وأمان</h2>
-            <p>منصة تعليم البرمجة الأولى التي تحمي محتواك التعليمي من السرقة. تعلم أحدث تقنيات البرمجة مع ضمان أقصى
-                درجات الحماية لدروسك.</p>
-            <button class="btn btn-primary"
-                style="padding: 0.8rem 2.5rem; font-size: 1.1rem; background: white; color: var(--primary);">ابدأ رحلتك
-                البرمجية</button>
-            <div class="security-badge">
-                <span>🔒</span>
-                <span>محمي بتقنيات متقدمة لمنع تسجيل الشاشة</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم الميزات -->
-    <section class="features">
-        <div class="section-title">
-            <h2>لماذا تتعلم البرمجة مع كود شيلد؟</h2>
-            <p>نقدم تجربة تعلم فريدة تجمع بين المحتوى المتميز والحماية المتقدمة</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">💻</div>
-                <h3>مسارات تعلم شاملة</h3>
-                <p>ابدأ من الصفر حتى الاحتراف مع مسارات تعلم منهجية تغطي جميع مجالات البرمجة.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🛡️</div>
-                <h3>حماية محتوى متميزة</h3>
-                <p>نحمي دروسك من التسجيل والنسخ غير المصرح به بتقنيات تشفير متطورة.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>مشاريع عملية حقيقية</h3>
-                <p>طبق ما تتعلمه على مشاريع واقعية تبني portfolio قوي لسيرتك الذاتية.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">👨‍💻</div>
-                <h3>مجتمع برمجي نشط</h3>
-                <p>انضم إلى آلاف المبرمجين وتواصل مع الخبراء واطلب المساعدة عندما تحتاج.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم لغات البرمجة -->
-    <section class="languages">
-        <div class="section-title">
-            <h2>تعلم أهم لغات البرمجة</h2>
-            <p>اختر من بين مجموعة واسعة من لغات البرمجة والتقنيات الحديثة</p>
-        </div>
-        <div class="languages-grid">
-            <div class="language-item">
-                <div class="language-icon">🐍</div>
-                <h4>Python</h4>
-            </div>
-            <div class="language-item">
-                <div class="language-icon">☕</div>
-                <h4>Java</h4>
-            </div>
-            <div class="language-item">
-                <div class="language-icon">⚡</div>
-                <h4>JavaScript</h4>
-            </div>
-            <div class="language-item">
-                <div class="language-icon">🔷</div>
-                <h4>TypeScript</h4>
-            </div>
-            <div class="language-item">
-                <div class="language-icon">🧮</div>
-                <h4>C++</h4>
-            </div>
-            <div class="language-item">
-                <div class="language-icon">📱</div>
-                <h4>Kotlin</h4>
-            </div>
-            <div class="language-item">
-                <div class="language-icon">📲</div>
-                <h4>Swift</h4>
-            </div>
-            <div class="language-item">
-                <div class="language-icon">🐘</div>
-                <h4>PHP</h4>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم الدورات -->
-    <section class="courses">
-        <div class="section-title">
-            <h2>أشهر مساراتنا التعليمية</h2>
-            <p>اختر المسار الذي يناسب أهدافك البرمجية</p>
-        </div>
-        <div class="courses-grid">
-            <div class="course-card">
-                <div class="course-image"
-                    style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+    <!-- صفحة عرض الفيديوهات -->
+    <section class="video-player-page">
+        <div class="video-container">
+            <div class="video-player">
+                <video id="mainVideo" controls>
+                    <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
+                    متصفحك لا يدعم تشغيل الفيديو.
+                </video>
+                <div class="video-controls">
+                    <button id="playPauseBtn">▶️</button>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                    <span class="time">0:00 / 0:00</span>
+                    <button id="fullscreenBtn">⛶</button>
                 </div>
-                <div class="course-content">
-                    <span class="course-category">تطوير الويب</span>
-                    <h3>مطور ويب كامل</h3>
-                    <p>تعلم HTML, CSS, JavaScript وتقنيات الويب الحديثة لتصبح مطور ويب محترف.</p>
-                    <div class="course-meta">
-                        <span>🕒 6 شهور</span>
-                        <span>👤 12,500+ طالب</span>
+            </div>
+
+            <div class="video-info">
+                <h1>مقدمة في لغة Python - الدرس الأول</h1>
+                <div class="video-meta">
+                    <span>🕒 15 دقيقة</span>
+                    <span>👁️ 1,250 مشاهدة</span>
+                    <span>📅 15 مارس 2023</span>
+                </div>
+                <div class="video-description">
+                    <p>في هذا الدرس، سنبدأ رحلتنا في تعلم لغة Python من الصفر. سنتعرف على ماهية Python، لماذا تعتبر من
+                        أفضل لغات البرمجة للمبتدئين، وكيفية تثبيت Python على جهازك.</p>
+                    <p>سنتعلم أيضًا كيفية كتابة أول برنامج لنا باستخدام Python، وسنفهم المفاهيم الأساسية مثل المتغيرات،
+                        أنواع البيانات، وعمليات الإدخال والإخراج.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="playlist-container">
+            <div class="playlist-header">
+                مسار Python الشامل
+            </div>
+            <div class="playlist-items">
+                <div class="playlist-item active">
+                    <div class="playlist-thumbnail"
+                        style="background-image: url('https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                    </div>
+                    <div class="playlist-item-info">
+                        <div class="playlist-item-title">مقدمة في لغة Python - الدرس الأول</div>
+                        <div class="playlist-item-duration">15:30</div>
                     </div>
                 </div>
-            </div>
-            <div class="course-card">
-                <div class="course-image"
-                    style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
-                </div>
-                <div class="course-content">
-                    <span class="course-category">علم البيانات</span>
-                    <h3>علم البيانات مع Python</h3>
-                    <p>إتقان تحليل البيانات، التعلم الآلي، والتصور البياني باستخدام Python.</p>
-                    <div class="course-meta">
-                        <span>🕒 4 شهور</span>
-                        <span>👤 8,200+ طالب</span>
+                <div class="playlist-item">
+                    <div class="playlist-thumbnail"
+                        style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                    </div>
+                    <div class="playlist-item-info">
+                        <div class="playlist-item-title">أنواع البيانات والمتغيرات في Python</div>
+                        <div class="playlist-item-duration">22:15</div>
                     </div>
                 </div>
-            </div>
-            <div class="course-card">
-                <div class="course-image"
-                    style="background-image: url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
-                </div>
-                <div class="course-content">
-                    <span class="course-category">تطبيقات الجوال</span>
-                    <h3>تطوير تطبيقات Android</h3>
-                    <p>أنشئ تطبيقات Android متقدمة باستخدام Kotlin و Android Studio.</p>
-                    <div class="course-meta">
-                        <span>🕒 5 شهور</span>
-                        <span>👤 6,800+ طالب</span>
+                <div class="playlist-item">
+                    <div class="playlist-thumbnail"
+                        style="background-image: url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                    </div>
+                    <div class="playlist-item-info">
+                        <div class="playlist-item-title">الجمل الشرطية والتحكم في التدفق</div>
+                        <div class="playlist-item-duration">18:45</div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم الإحصائيات -->
-    <section class="stats">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <h3>75,000+</h3>
-                <p>مبرمج نشط</p>
-            </div>
-            <div class="stat-item">
-                <h3>1,500+</h3>
-                <p>درس برمجي</p>
-            </div>
-            <div class="stat-item">
-                <h3>200+</h3>
-                <p>مشروع عملي</p>
-            </div>
-            <div class="stat-item">
-                <h3>98%</h3>
-                <p>معدل نجاح الخريجين</p>
+                <div class="playlist-item">
+                    <div class="playlist-thumbnail"
+                        style="background-image: url('https://images.unsplash.com/photo-1516116216624-53e697fedbea?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                    </div>
+                    <div class="playlist-item-info">
+                        <div class="playlist-item-title">الحلقات التكرارية (Loops) في Python</div>
+                        <div class="playlist-item-duration">25:10</div>
+                    </div>
+                </div>
+                <div class="playlist-item">
+                    <div class="playlist-thumbnail"
+                        style="background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                    </div>
+                    <div class="playlist-item-info">
+                        <div class="playlist-item-title">الدوال (Functions) والمكتبات</div>
+                        <div class="playlist-item-duration">28:35</div>
+                    </div>
+                </div>
+                <div class="playlist-item">
+                    <div class="playlist-thumbnail"
+                        style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                    </div>
+                    <div class="playlist-item-info">
+                        <div class="playlist-item-title">معالجة الأخطاء (Exception Handling)</div>
+                        <div class="playlist-item-duration">20:20</div>
+                    </div>
+                </div>
+                <div class="playlist-item">
+                    <div class="playlist-thumbnail"
+                        style="background-image: url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                    </div>
+                    <div class="playlist-item-info">
+                        <div class="playlist-item-title">العمل مع الملفات في Python</div>
+                        <div class="playlist-item-duration">23:50</div>
+                    </div>
+                </div>
+                <div class="playlist-item">
+                    <div class="playlist-thumbnail"
+                        style="background-image: url('https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                    </div>
+                    <div class="playlist-item-info">
+                        <div class="playlist-item-title">مشروع تطبيقي: بناء آلة حاسبة</div>
+                        <div class="playlist-item-duration">32:15</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -834,6 +966,59 @@
         // منع النقر الأيمن
         document.addEventListener('contextmenu', function (e) {
             e.preventDefault();
+        });
+
+        // تفعيل قائمة التشغيل
+        document.querySelectorAll('.playlist-item').forEach(item => {
+            item.addEventListener('click', function () {
+                // إزالة النشط من جميع العناصر
+                document.querySelectorAll('.playlist-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+
+                // إضافة النشط للعنصر المحدد
+                this.classList.add('active');
+
+                // تحديث عنوان الفيديو والوصف (في تطبيق حقيقي، سيتم تحميل فيديو جديد)
+                const title = this.querySelector('.playlist-item-title').textContent;
+                document.querySelector('.video-info h1').textContent = title;
+
+                // إعادة تشغيل الفيديو من البداية
+                const video = document.getElementById('mainVideo');
+                video.currentTime = 0;
+                video.play();
+            });
+        });
+
+        // التحكم في الفيديو
+        const video = document.getElementById('mainVideo');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+
+        video.addEventListener('play', function () {
+            playPauseBtn.textContent = '⏸️';
+        });
+
+        video.addEventListener('pause', function () {
+            playPauseBtn.textContent = '▶️';
+        });
+
+        playPauseBtn.addEventListener('click', function () {
+            if (video.paused) {
+                video.play();
+            } else {
+                video.pause();
+            }
+        });
+
+        // زر الشاشة الكاملة
+        document.getElementById('fullscreenBtn').addEventListener('click', function () {
+            if (video.requestFullscreen) {
+                video.requestFullscreen();
+            } else if (video.webkitRequestFullscreen) {
+                video.webkitRequestFullscreen();
+            } else if (video.msRequestFullscreen) {
+                video.msRequestFullscreen();
+            }
         });
     </script>
 </body>
